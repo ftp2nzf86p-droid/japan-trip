@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>יפן 2026 – נטי ויהודה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sakura: #e8927c;
+  --sakura-light: #fdf0ec;
+  --gold: #c9a84c;
+  --gold-light: #fdf8ee;
+  --indigo: #2d3561;
+  --indigo-mid: #4a5490;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --bg: #fafaf8;
+  --white: #ffffff;
+  --green: #2d6a4f;
+  --green-light: #d8f3dc;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Heebo', sans-serif; background: var(--bg); color: var(--text); direction: rtl; }
+
+/* NAV */
+nav { background: var(--indigo); color: white; padding: 0 2rem; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+.nav-logo { font-family: 'Noto Serif JP', serif; font-size: 18px; padding: 1rem 1.5rem 1rem 0; border-left: 1px solid rgba(255,255,255,0.2); margin-left: 1rem; white-space: nowrap; }
+.nav-logo span { color: var(--sakura); }
+.nav-tabs { display: flex; gap: 0; overflow-x: auto; }
+.nav-tab { padding: 1.1rem 1.2rem; font-size: 13px; color: rgba(255,255,255,0.7); cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; }
+.nav-tab:hover { color: white; background: rgba(255,255,255,0.05); }
+.nav-tab.active { color: white; border-bottom-color: var(--sakura); }
+
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
+
+/* HERO */
+.hero { background: var(--indigo); color: white; text-align: center; padding: 4rem 2rem 5rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E"); }
+.hero-kana { font-family: 'Noto Serif JP', serif; font-size: 42px; color: var(--sakura); margin-bottom: 0.5rem; position: relative; }
+.hero-title { font-size: 32px; font-weight: 700; margin-bottom: 0.5rem; position: relative; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 2rem; position: relative; }
+.hero-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; position: relative; }
+.hbadge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.9); font-size: 12px; padding: 5px 14px; border-radius: 99px; }
+
+/* CONTENT WRAPPER */
+.content { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* SECTION HEADER */
+.sec-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+.sec-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.sec-icon.group { background: var(--gold-light); }
+.sec-icon.couple { background: #fbe8f0; }
+.sec-title { font-size: 20px; font-weight: 700; }
+.sec-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+/* STATS */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 2rem; }
+.stat { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; text-align: center; }
+.stat-num { font-size: 26px; font-weight: 700; color: var(--indigo); }
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* TIMELINE */
+.timeline-wrap { position: relative; }
+.tl-line { position: absolute; right: 19px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--sakura)); opacity: 0.3; }
+.tl-item { display: flex; gap: 16px; margin-bottom: 12px; position: relative; }
+.tl-dot-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.tl-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; border: 2px solid white; box-shadow: 0 0 0 2px var(--border); z-index: 1; }
+.tl-dot.group { background: var(--gold-light); color: #7a5c0a; }
+.tl-dot.couple { background: #fbe8f0; color: #8b2252; }
+.tl-dot.transit { background: #e8f0fe; color: #1a3a8f; }
+.tl-body { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; flex: 1; margin-bottom: 0; }
+.tl-date { font-size: 11px; color: var(--muted); margin-bottom: 4px; font-weight: 500; letter-spacing: 0.5px; }
+.tl-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.tl-tag { display: inline-block; font-size: 11px; padding: 2px 9px; border-radius: 99px; margin-top: 6px; font-weight: 500; }
+.tag-group { background: var(--gold-light); color: #7a5c0a; }
+.tag-couple { background: #fbe8f0; color: #8b2252; }
+.tag-flight { background: #e8f0fe; color: #1a3a8f; }
+
+/* DAY CARDS */
+.day-card { background: white; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 12px; overflow: hidden; transition: box-shadow 0.2s; }
+.day-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.day-header { display: flex; align-items: center; gap: 14px; padding: 1rem 1.25rem; cursor: pointer; }
+.day-num { width: 42px; height: 42px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; line-height: 1.2; }
+.dn-group { background: var(--gold-light); color: #7a5c0a; }
+.dn-couple { background: #fbe8f0; color: #8b2252; }
+.dn-transit { background: #e8f0fe; color: #1a3a8f; }
+.day-info { flex: 1; min-width: 0; }
+.day-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.day-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.day-badge { font-size: 11px; padding: 2px 8px; border-radius: 99px; margin-top: 4px; display: inline-block; }
+.db-group { background: var(--gold-light); color: #7a5c0a; }
+.db-couple { background: #fbe8f0; color: #8b2252; }
+.day-chevron { color: var(--muted); font-size: 18px; transition: transform 0.25s; flex-shrink: 0; }
+.day-chevron.open { transform: rotate(180deg); }
+.day-body { display: none; padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--border); }
+.day-body.open { display: block; }
+.act { display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px solid #f5f5f5; align-items: flex-start; }
+.act:last-child { border-bottom: none; }
+.act-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.act-text { font-size: 13px; color: var(--muted); line-height: 1.5; flex: 1; }
+.act-text strong { color: var(--text); font-weight: 600; }
+.hotel-pill { display: inline-flex; align-items: center; gap: 6px; background: #f8f9fa; border: 1px solid var(--border); border-radius: 99px; font-size: 11px; color: var(--muted); padding: 4px 12px; margin-top: 10px; }
+
+/* FLIGHT CARDS */
+.flight-section { margin-bottom: 2rem; }
+.flight-card { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; margin-bottom: 12px; }
+.flight-label { font-size: 12px; font-weight: 700; color: var(--indigo); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.flight-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.flight-time { font-size: 18px; font-weight: 700; color: var(--text); min-width: 52px; }
+.flight-arrow { flex: 1; display: flex; align-items: center; gap: 8px; }
+.flight-line { flex: 1; height: 1px; background: var(--border); }
+.flight-plane { font-size: 16px; color: var(--indigo); }
+.flight-duration { font-size: 11px; color: var(--muted); }
+.flight-route { font-size: 13px; color: var(--muted); }
+.flight-divider { border: none; border-top: 1px dashed var(--border); margin: 10px 0; }
+.flight-highlight { border-color: #e8b4c8; background: #fff8fb; }
+.flight-highlight .flight-label { color: #8b2252; }
+
+/* SHINKANSEN */
+.shin-hero { background: var(--indigo); color: white; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; gap: 1.5rem; align-items: center; }
+.shin-emoji { font-size: 48px; }
+.shin-info h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.shin-info p { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+.shin-badges { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.shin-badge { background: rgba(255,255,255,0.12); font-size: 12px; padding: 4px 12px; border-radius: 99px; color: rgba(255,255,255,0.9); }
+.tip-card { background: #fff8e1; border: 1px solid #f9d776; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 12px; font-size: 13px; color: #7a5c0a; line-height: 1.6; }
+.tip-card strong { font-weight: 700; }
+.book-card { background: var(--green-light); border: 1px solid #95d5b2; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 12px; }
+.book-card h4 { font-size: 14px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+.book-card p { font-size: 13px; color: #2d6a4f; line-height: 1.6; }
+.book-card a { color: var(--green); font-weight: 600; }
+
+/* KYOTO IDEAS */
+.ideas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+.idea-card { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; transition: transform 0.2s, box-shadow 0.2s; }
+.idea-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
+.idea-emoji { font-size: 28px; margin-bottom: 10px; }
+.idea-name { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.idea-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.idea-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.itag { font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 500; }
+.itag-r { background: #fbe8f0; color: #8b2252; }
+.itag-c { background: #ede8fe; color: #4a2a8f; }
+.itag-n { background: var(--green-light); color: var(--green); }
+.itag-f { background: var(--gold-light); color: #7a5c0a; }
+
+/* CHECKLIST */
+.checklist { list-style: none; }
+.checklist li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+.checklist li:last-child { border-bottom: none; }
+.cbox { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; margin-top: 1px; }
+.cbox.checked { background: var(--sakura); border-color: var(--sakura); }
+.cbox.checked::after { content: '✓'; font-size: 12px; color: white; font-weight: 700; }
+.ctext { font-size: 13px; color: var(--text); line-height: 1.5; }
+.done .ctext { text-decoration: line-through; color: var(--muted); }
+.checklist-section { margin-bottom: 1.5rem; }
+.cl-title { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+
+/* PHOTOS */
+.upload-zone { border: 2px dashed var(--border); border-radius: 16px; padding: 3rem 2rem; text-align: center; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+.upload-zone:hover { border-color: var(--sakura); background: var(--sakura-light); }
+.upload-icon { font-size: 40px; margin-bottom: 12px; }
+.upload-text { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+.upload-sub { font-size: 13px; }
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 1.5rem; }
+.photo-thumb { aspect-ratio: 1; border-radius: 10px; object-fit: cover; width: 100%; cursor: pointer; transition: transform 0.2s; }
+.photo-thumb:hover { transform: scale(1.02); }
+#photo-input { display: none; }
+.add-btn { background: var(--indigo); color: white; border: none; border-radius: 99px; padding: 10px 24px; font-size: 13px; font-family: 'Heebo', sans-serif; cursor: pointer; margin-top: 1rem; transition: background 0.2s; }
+.add-btn:hover { background: var(--indigo-mid); }
+
+/* NOTES */
+.note-area { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 12px; }
+.note-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.5px; }
+.note-area textarea { width: 100%; background: transparent; border: none; outline: none; font-size: 14px; color: var(--text); font-family: 'Heebo', sans-serif; resize: vertical; min-height: 80px; line-height: 1.7; }
+
+/* DIVIDER */
+.divider { display: flex; align-items: center; gap: 16px; margin: 2.5rem 0; }
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-text { font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+/* FOOTER */
+footer { background: var(--indigo); color: rgba(255,255,255,0.6); text-align: center; padding: 1.5rem; font-size: 13px; }
+footer span { color: var(--sakura); }
+
+@media (max-width: 600px) {
+  .nav-logo { font-size: 15px; padding: 0.75rem 1rem 0.75rem 0; }
+  .nav-tab { padding: 0.9rem 0.8rem; font-size: 12px; }
+  .hero-kana { font-size: 30px; }
+  .hero-title { font-size: 22px; }
+  .shin-hero { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">🗾 <span>יפן 2026</span></div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showSection('overview')">סקירה</div>
+    <div class="nav-tab" onclick="showSection('group')">קבוצה</div>
+    <div class="nav-tab" onclick="showSection('couple')">נטי ויהודה</div>
+    <div class="nav-tab" onclick="showSection('shinkansen')">שינקנסן</div>
+    <div class="nav-tab" onclick="showSection('kyoto')">קיוטו</div>
+    <div class="nav-tab" onclick="showSection('flights')">טיסות</div>
+    <div class="nav-tab" onclick="showSection('checklist')">רשימה</div>
+    <div class="nav-tab" onclick="showSection('photos')">תמונות</div>
+    <div class="nav-tab" onclick="showSection('notes')">הערות</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kana">日本 2026</div>
+  <div class="hero-title">יפן – טוקיו וקיוטו</div>
+  <div class="hero-sub">מאי–יוני 2026 · Spirit Extraordinary Travel</div>
+  <div class="hero-badges">
+    <span class="hbadge">✈️ אתיחאד</span>
+    <span class="hbadge">🏨 Hyatt Regency Tokyo</span>
+    <span class="hbadge">🏨 Shibuya Excel Hotel</span>
+    <span class="hbadge">🏯 Gate Hotel Kyoto</span>
+    <span class="hbadge">🚄 שינקנסן</span>
+    <span class="hbadge">📅 26.5 – 6.6.2026</span>
+  </div>
+</div>
+
+<!-- SECTION: OVERVIEW -->
+<div id="section-overview" class="section active">
+  <div class="content">
+    <div class="stats">
+      <div class="stat"><div class="stat-num">12</div><div class="stat-label">ימי טיול</div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">ערים</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">מלונות</div></div>
+      <div class="stat"><div class="stat-num">15+</div><div class="stat-label">אתרים</div></div>
+    </div>
+
+    <div class="sec-header">
+      <div class="sec-icon group">🗓️</div>
+      <div><div class="sec-title">ציר הזמן המלא</div><div class="sec-sub">מי איפה ומתי</div></div>
+    </div>
+
+    <div class="timeline-wrap">
+      <div class="tl-line"></div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot transit">26.5</div></div>
+        <div class="tl-body">
+          <div class="tl-date">26.5.2026 · שלישי</div>
+          <div class="tl-title">יהודה טס עם הקבוצה</div>
+          <div class="tl-desc">ת"א → אבו דאבי (EY594, 15:05) → טוקיו (EY800, 21:25)</div>
+          <span class="tl-tag tag-group">קבוצה</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot group">27.5</div></div>
+        <div class="tl-body">
+          <div class="tl-date">27.5.2026 · רביעי</div>
+          <div class="tl-title">יהודה מגיע לטוקיו · יום 1–2 עם הקבוצה</div>
+          <div class="tl-desc">צ'ק-אין Hyatt Regency · Kabukicho · תצפית עיריית שינג'וקו · ארוחת ערב Gojo Kappo-Niku</div>
+          <span class="tl-tag tag-group">קבוצה</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot group">28.5</div></div>
+        <div class="tl-body">
+          <div class="tl-date">28.5.2026 · חמישי</div>
+          <div class="tl-title">יום 3 · האי אודיאבה – שוק צוקיג'י</div>
+          <div class="tl-desc">שוק Tsukiji · האי Odaiba · אוטובוס אמפיבי · Akihabara · TeamLab Borderless · ארוחת ערב Gonpachi</div>
+          <span class="tl-tag tag-group">קבוצה</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot couple">29.5</div></div>
+        <div class="tl-body">
+          <div class="tl-date">29.5.2026 · שישי</div>
+          <div class="tl-title">נטי מגיעה! · יום 4 עם הקבוצה</div>
+          <div class="tl-desc">נטי טסה לבד (אתיחאד 15:00) ומצטרפת · טקס תה · מקדש Sensoji · Tokyo Skytree · מעבר Shibuya</div>
+          <span class="tl-tag tag-couple">נטי מגיעה 💕</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot group">30.5</div></div>
+        <div class="tl-body">
+          <div class="tl-date">30.5.2026 · שבת</div>
+          <div class="tl-title">יום 5 · מקדש מייג'י – האראג'וקו</div>
+          <div class="tl-desc">מקדש Meiji · Harajuku · Omotesando · Ginza · ארוחת ערב Banya Izakaya</div>
+          <span class="tl-tag tag-group">קבוצה</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot group">31.5</div></div>
+        <div class="tl-body">
+          <div class="tl-date">31.5.2026 · ראשון</div>
+          <div class="tl-title">יום 6 · אקונה – אגם אשי · צ'ק-אין שיבויה</div>
+          <div class="tl-desc">רכבת קליע לאודווארה · שייט אגם אשי · מוזיאון פתוח האקונה · Onsen · חזרה לטוקיו<br><strong>נטי ויהודה עוברים ל-Shibuya Excel Hotel</strong></div>
+          <span class="tl-tag tag-group">קבוצה</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot couple">1.6</div></div>
+        <div class="tl-body">
+          <div class="tl-date">1.6.2026 · שני</div>
+          <div class="tl-title">הקבוצה חוזרת · נטי ויהודה נשארים! 💑</div>
+          <div class="tl-desc">יום חופשי בטוקיו לשניים – Daikanyama, Yoyogi Park, ערוחת ערב רומנטית</div>
+          <span class="tl-tag tag-couple">לבד 💕</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot transit">2.6</div></div>
+        <div class="tl-body">
+          <div class="tl-date">2.6.2026 · שלישי</div>
+          <div class="tl-title">שינקנסן לקיוטו! 🚄</div>
+          <div class="tl-desc">צ'ק-אאוט שיבויה · שינקנסן Nozomi (2:15 שעות) · נוף לפוג'י בדרך · צ'ק-אין Gate Hotel Kyoto</div>
+          <span class="tl-tag tag-couple">לבד 💕</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot couple">3.6</div></div>
+        <div class="tl-body">
+          <div class="tl-date">3.6.2026 · רביעי</div>
+          <div class="tl-title">קיוטו הקלאסי</div>
+          <div class="tl-desc">Fushimi Inari · Kinkaku-ji (ביית הזהב) · Gion · Kiyomizudera</div>
+          <span class="tl-tag tag-couple">קיוטו 💕</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot couple">4.6</div></div>
+        <div class="tl-body">
+          <div class="tl-date">4.6.2026 · חמישי</div>
+          <div class="tl-title">ארשיאמה – יער הבמבוק</div>
+          <div class="tl-desc">יער Arashiyama · מקדש Tenryu-ji · שייט בנהר · טקס תה · Onsen</div>
+          <span class="tl-tag tag-couple">קיוטו 💕</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot transit">5.6</div></div>
+        <div class="tl-body">
+          <div class="tl-date">5.6.2026 · שישי</div>
+          <div class="tl-title">קיוטו → אוסקה → הביתה ✈️</div>
+          <div class="tl-desc">צ'ק-אאוט · כמה שעות באוסקה · EY815 18:40 אוסקה → אבו דאבי</div>
+          <span class="tl-tag tag-flight">טיסה</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot-wrap"><div class="tl-dot transit">6.6</div></div>
+        <div class="tl-body">
+          <div class="tl-date">6.6.2026 · שבת</div>
+          <div class="tl-title">נחיתה בת"א 🏠</div>
+          <div class="tl-desc">EY593 · אבו דאבי → ת"א · נחיתה 11:25</div>
+          <span class="tl-tag tag-flight">טיסה</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: GROUP -->
+<div id="section-group" class="section">
+  <div class="content">
+    <div class="sec-header">
+      <div class="sec-icon group">👥</div>
+      <div><div class="sec-title">טיול הקבוצה – Spirit</div><div class="sec-sub">26.5 – 1.6.2026 · Hyatt Regency Tokyo</div></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">7</div><div class="stat-label">לילות</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">ימי טיול</div></div>
+      <div class="stat"><div class="stat-num">12+</div><div class="stat-label">אתרים</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">ארוחות</div></div>
+    </div>
+
+    <div id="gdays"></div>
+  </div>
+</div>
+
+<!-- SECTION: COUPLE -->
+<div id="section-couple" class="section">
+  <div class="content">
+    <div class="sec-header">
+      <div class="sec-icon couple">💑</div>
+      <div><div class="sec-title">נטי ויהודה – לבד</div><div class="sec-sub">29.5 – 6.6.2026 · טוקיו וקיוטו</div></div>
+    </div>
+    <div id="cdays"></div>
+  </div>
+</div>
+
+<!-- SECTION: SHINKANSEN -->
+<div id="section-shinkansen" class="section">
+  <div class="content">
+    <div class="shin-hero">
+      <div class="shin-emoji">🚄</div>
+      <div class="shin-info">
+        <h3>שינקנסן – טוקיו → קיוטו</h3>
+        <p>רכבת הקליע היפנית – חוויה שחייבים לחוות. מרכז טוקיו למרכז קיוטו ב-2:15 שעות בדיוק, במהירות 285 קמ"ש.</p>
+        <div class="shin-badges">
+          <span class="shin-badge">⏱ 2:15 שעות</span>
+          <span class="shin-badge">💴 ~¥14,370 לאדם</span>
+          <span class="shin-badge">🗓 2.6.2026</span>
+          <span class="shin-badge">🗻 נוף לפוג'י בדרך!</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      🗻 <strong>טיפ חשוב!</strong> שבו בצד ימין (מושב D או E) בנסיעה מטוקיו לקיוטו. הר פוג'י מופיע בצד ימין כ-45 דקות לאחר ההמראה, ליד תחנת Mishima. אל תפספסו!
+    </div>
+
+    <div class="tip-card">
+      🧳 <strong>מזוודות גדולות?</strong> אם ממדי המזוודה (גובה+רוחב+עומק) עולים על 160 ס"מ – חייבים להזמין "מושב עם תא כבודה" מיוחד מראש. בלי הזמנה מראש = קנס ¥1,000 על הרכבת!
+    </div>
+
+    <div class="book-card">
+      <h4>✅ איך לקנות כרטיסים – הדרך הכי פשוטה</h4>
+      <p><strong>Smart EX</strong> – האפליקציה הרשמית של JR Central. נרשמים באתר <a href="https://smart-ex.jp/en" target="_blank">smart-ex.jp/en</a>, מחברים כרטיס אשראי זר, בוחרים תאריך ומושב, ומקבלים QR Code. ממש פשוט!</p>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay('sh1')">
+        <div class="day-num dn-transit">סוגי<br>רכבות</div>
+        <div class="day-info">
+          <div class="day-title">Nozomi / Hikari / Kodama – מה ההבדל?</div>
+          <div class="day-date">בחרו נכון!</div>
+        </div>
+        <div class="day-chevron" id="chev-sh1">▼</div>
+      </div>
+      <div class="day-body" id="body-sh1">
+        <div class="act"><div class="act-icon">🥇</div><div class="act-text"><strong>Nozomi</strong> – הכי מהיר (2:15 שעות), הכי תדיר (כל 5-10 דקות). ¥14,370. <strong>מומלץ!</strong></div></div>
+        <div class="act"><div class="act-icon">🥈</div><div class="act-text"><strong>Hikari</strong> – קצת יותר איטי (2:40 שעות), עוצר בתחנות נוספות. אותו מחיר. מתאים לבעלי JR Pass.</div></div>
+        <div class="act"><div class="act-icon">🥉</div><div class="act-text"><strong>Kodama</strong> – עוצר בכל תחנה (~4 שעות). זול יותר, לא מומלץ לנסיעה ארוכה.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: KYOTO -->
+<div id="section-kyoto" class="section">
+  <div class="content">
+    <div class="sec-header">
+      <div class="sec-icon couple">🏯</div>
+      <div><div class="sec-title">רעיונות לקיוטו</div><div class="sec-sub">רומנטי, תרבות, טבע ואוכל</div></div>
+    </div>
+    <div class="ideas-grid">
+      <div class="idea-card"><div class="idea-emoji">⛩️</div><div class="idea-name">Fushimi Inari</div><div class="idea-desc">אלפי שערי טוריי אדומים על ההר. מרהיב בבוקר מוקדם לפני ההמונים. כניסה חינם!</div><div class="idea-tags"><span class="itag itag-r">רומנטי</span><span class="itag itag-n">טבע</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🎋</div><div class="idea-name">יער הבמבוק – ארשיאמה</div><div class="idea-desc">מנהרת ירוק קסומה. הכי יפה בבוקר לפני 8:00. שלב עם מקדש Tenryu-ji.</div><div class="idea-tags"><span class="itag itag-r">רומנטי</span><span class="itag itag-n">טבע</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🏯</div><div class="idea-name">Kinkaku-ji – ביית הזהב</div><div class="idea-desc">אחד הצילומיים ביותר ביפן. מגיעים בוקר מוקדם. כרטיסים אפשר לקנות בכניסה.</div><div class="idea-tags"><span class="itag itag-c">תרבות</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🍵</div><div class="idea-name">טקס תה לזוגות</div><div class="idea-desc">חוויה יפנית אותנטית – מכינים ושותים מאצ'ה ביחד. הרבה סטודיואים מציעים חבילות לזוגות.</div><div class="idea-tags"><span class="itag itag-r">רומנטי</span><span class="itag itag-c">תרבות</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🏮</div><div class="idea-name">Gion בלילה</div><div class="idea-desc">רובע הגייאשות – פנסים, בתי עץ ואטמוספירה של יפן עתיקה. יש סיכוי לראות גיישה!</div><div class="idea-tags"><span class="itag itag-r">רומנטי</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🌊</div><div class="idea-name">שייט בנהר Hozu</div><div class="idea-desc">סירת עץ מסורתית דרך נוף הררי מדהים של ארשיאמה. חוויה שקטה ואינטימית.</div><div class="idea-tags"><span class="itag itag-r">רומנטי</span><span class="itag itag-n">טבע</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🛤️</div><div class="idea-name">Philosopher's Path</div><div class="idea-desc">שביל הליכה לאורך תעלה המחבר בין מקדשים. השלווה בכבודה ועצמה.</div><div class="idea-tags"><span class="itag itag-r">רומנטי</span><span class="itag itag-n">טבע</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🍜</div><div class="idea-name">Pontocho Alley</div><div class="idea-desc">סמטה צרה מלאת מסעדות יפניות אינטימיות לאורך הנהר. מושלם לארוחת ערב.</div><div class="idea-tags"><span class="itag itag-f">אוכל</span><span class="itag itag-r">רומנטי</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">♨️</div><div class="idea-name">Onsen לזוגות</div><div class="idea-desc">אמבטיות מים חמים מינרליים טבעיים. יש בקיוטו מספר מקומות איכותיים במיוחד לזוגות.</div><div class="idea-tags"><span class="itag itag-r">רומנטי</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🏛️</div><div class="idea-name">Kiyomizudera</div><div class="idea-desc">מקדש על ההר עם מרפסת עץ ונוף מרהיב לעיר. מהיפים ביותר ביפן.</div><div class="idea-tags"><span class="itag itag-c">תרבות</span><span class="itag itag-n">טבע</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🛒</div><div class="idea-name">שוק Nishiki</div><div class="idea-desc">"מטבח קיוטו" – שוק מקורה צר עם דוכני אוכל מסורתיים, תה, חמוצים ומתוקים.</div><div class="idea-tags"><span class="itag itag-f">אוכל</span></div></div>
+      <div class="idea-card"><div class="idea-emoji">🎎</div><div class="idea-name">להתלבש כגיישה</div><div class="idea-desc">הרבה סטודיואים ברובע Gion מציעים השכרת קימונו ואיפור גיישה לשעות. תמונות מיוחדות!</div><div class="idea-tags"><span class="itag itag-r">רומנטי</span><span class="itag itag-c">תרבות</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: FLIGHTS -->
+<div id="section-flights" class="section">
+  <div class="content">
+    <div class="sec-header">
+      <div class="sec-icon group">✈️</div>
+      <div><div class="sec-title">כל הטיסות</div><div class="sec-sub">יהודה ונטי – אתיחאד</div></div>
+    </div>
+
+    <div class="flight-card">
+      <div class="flight-label">✈️ יהודה – הלוך · 26.5.2026</div>
+      <div class="flight-row">
+        <div class="flight-time">15:05</div>
+        <div class="flight-arrow"><div class="flight-line"></div><div class="flight-plane">✈</div><div class="flight-line"></div></div>
+        <div class="flight-time">19:15</div>
+      </div>
+      <div class="flight-route">ת"א (בן גוריון T3) → אבו דאבי (זאיד T:A) · EY594 · Boeing 777 · 3:10 שעות · 25 ק"ג כבודה</div>
+      <hr class="flight-divider">
+      <div class="flight-row">
+        <div class="flight-time">21:25</div>
+        <div class="flight-arrow"><div class="flight-line"></div><div class="flight-plane">✈</div><div class="flight-line"></div></div>
+        <div class="flight-time">12:35 <small style="font-size:11px;color:var(--muted)">+1</small></div>
+      </div>
+      <div class="flight-route">אבו דאבי (T:A) → טוקיו נאריטה (T1) · EY800 · Airbus A350 · 10:10 שעות · 25 ק"ג כבודה</div>
+    </div>
+
+    <div class="flight-card">
+      <div class="flight-label">✈️ נטי – הלוך · 29.5.2026</div>
+      <div class="flight-row">
+        <div class="flight-time">~15:00</div>
+        <div class="flight-arrow"><div class="flight-line"></div><div class="flight-plane">✈</div><div class="flight-line"></div></div>
+        <div class="flight-time">טוקיו</div>
+      </div>
+      <div class="flight-route">ת"א → טוקיו · אתיחאד · מצטרפת לקבוצה!</div>
+    </div>
+
+    <div class="flight-card flight-highlight">
+      <div class="flight-label">💑 נטי ויהודה ביחד – חזור · 5–6.6.2026</div>
+      <div class="flight-row">
+        <div class="flight-time">18:40</div>
+        <div class="flight-arrow"><div class="flight-line"></div><div class="flight-plane">✈</div><div class="flight-line"></div></div>
+        <div class="flight-time">00:40 <small style="font-size:11px;color:var(--muted)">+1</small></div>
+      </div>
+      <div class="flight-route">אוסקה KIX (T1) → אבו דאבי (T:A) · EY815 · Boeing 787-9 · 11:00 שעות · 25 ק"ג כבודה</div>
+      <hr class="flight-divider">
+      <div class="flight-row">
+        <div class="flight-time">09:00</div>
+        <div class="flight-arrow"><div class="flight-line"></div><div class="flight-plane">✈</div><div class="flight-line"></div></div>
+        <div class="flight-time">11:25</div>
+      </div>
+      <div class="flight-route">אבו דאבי (T:A) → ת"א (בן גוריון T3) · EY593 · Boeing 777 · 3:25 שעות</div>
+      <div style="margin-top:10px; font-size:12px; color:#8b2252; background:#fff0f6; padding:8px 12px; border-radius:8px;">קוד הזמנה: <strong>8RME8V</strong> · יהודה לוי · E-ticket: EY 607-6047940717-18</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: CHECKLIST -->
+<div id="section-checklist" class="section">
+  <div class="content">
+    <div class="sec-header">
+      <div class="sec-icon group">✅</div>
+      <div><div class="sec-title">רשימת מטלות</div><div class="sec-sub">לחצי לסימון</div></div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="cl-title">לפני הנסיעה – כללי</div>
+      <ul class="checklist" id="cl1">
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">דרכון בתוקף של שניכם (+6 חודשים)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">ביטוח נסיעות</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">ין יפני (JPY) – להחליף לפני</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">כרטיסי Suica / IC Card לתחבורה</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">מתאם חשמל יפני (100V, Type A)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">eSIM / SIM יפנית</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">Google Maps offline – טוקיו, קיוטו, אוסקה</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">גרביים נקיות (כניסה למקדשים!)</span></li>
+      </ul>
+    </div>
+
+    <div class="checklist-section">
+      <div class="cl-title">הזמנות לנטי ויהודה</div>
+      <ul class="checklist" id="cl2">
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">שינקנסן 2.6 – טוקיו → קיוטו (smart-ex.jp) – לשמור מושב E לנוף לפוג'י!</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">טקס תה לזוגות בקיוטו</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">מסעדה ב-Pontocho – לילה ראשון בקיוטו</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">Kinkaku-ji – כרטיסים מראש אונליין</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">Onsen לזוגות בקיוטו</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">העברה מהמלון לנמל התעופה KIX ב-5.6</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">השכרת קימונו ב-Gion (אופציונלי)</span></li>
+      </ul>
+    </div>
+
+    <div class="checklist-section">
+      <div class="cl-title">כרטיסים וכניסות – קבוצה</div>
+      <ul class="checklist" id="cl3">
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">TeamLab Borderless – חייבים להזמין מראש!</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">Tokyo Skytree – כרטיסים מראש</span></li>
+        <li onclick="toggleCheck(this)"><div class="cbox"></div><span class="ctext">אוטובוס אמפיבי Odaiba – הזמנה</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: PHOTOS -->
+<div id="section-photos" class="section">
+  <div class="content">
+    <div class="sec-header">
+      <div class="sec-icon group">📸</div>
+      <div><div class="sec-title">תמונות הטיול</div><div class="sec-sub">העלי תמונות מהמסע</div></div>
+    </div>
+    <input type="file" id="photo-input" accept="image/*" multiple>
+    <div class="upload-zone" onclick="document.getElementById('photo-input').click()">
+      <div class="upload-icon">📷</div>
+      <div class="upload-text">לחצי להעלאת תמונות</div>
+      <div class="upload-sub">מהקבוצה ומהטיול הזוגי</div>
+    </div>
+    <div class="photo-grid" id="photo-grid"></div>
+    <button class="add-btn" onclick="document.getElementById('photo-input').click()" style="margin-top:1rem;">+ הוסיפי תמונות</button>
+  </div>
+</div>
+
+<!-- SECTION: NOTES -->
+<div id="section-notes" class="section">
+  <div class="content">
+    <div class="sec-header">
+      <div class="sec-icon group">📝</div>
+      <div><div class="sec-title">הערות ורשמים</div><div class="sec-sub">זיכרונות, טיפים ורשימות</div></div>
+    </div>
+    <div class="note-area"><div class="note-label">רשמים מהטיול</div><textarea placeholder="כתבי כאן זיכרונות, רגעים מיוחדים..."></textarea></div>
+    <div class="note-area"><div class="note-label">המסעדות הכי טעימות</div><textarea placeholder="שמות מסעדות שאהבתם..."></textarea></div>
+    <div class="note-area"><div class="note-label">קניות – מה לקחת בחזרה</div><textarea placeholder="מתנות, מוצרים יפניים, מזכרות..."></textarea></div>
+    <div class="note-area"><div class="note-label">טיפים לטיול הבא</div><textarea placeholder="מה לעשות אחרת בפעם הבאה..."></textarea></div>
+  </div>
+</div>
+
+<footer>
+  🗾 יפן 2026 · <span>נטי ויהודה לוי</span> · Spirit Extraordinary Travel
+</footer>
+
+<script>
+const groupDays = [
+  { id:'g1', num:'1–2', date:'26–27.5.2026 · שלישי–רביעי', title:'ת"א → טוקיו · הגעה', badge:'db-group', activities:[
+    {icon:'✈️', text:'המראה מנתב"ג דרך <strong>אבו דאבי</strong> · נחיתה בטוקיו למחרת'},
+    {icon:'🏨', text:'צ\'ק-אין Hyatt Regency Tokyo · מנוחה קצרה'},
+    {icon:'🌆', text:'סיור ערב ב<strong>Kabukicho</strong> – רובע הבילויים של שינג\'וקו'},
+    {icon:'🍶', text:'רחוב האיזאקיות – בתי אוכל קטנים עם שף מול הלקוחות'},
+    {icon:'🏙️', text:'תצפית ממגדל <strong>עיריית שינג\'וקו</strong> (עד 22:00)'},
+    {icon:'🍽️', text:'ארוחת ערב יוקרתית ב-<strong>Gojo Kappo-Niku</strong> – קומה 49'},
+  ], hotel:'Hyatt Regency Tokyo'},
+  { id:'g2', num:'3', date:'28.5.2026 · חמישי', title:'האי אודיאבה – שוק צוקיג\'י', badge:'db-group', activities:[
+    {icon:'🐟', text:'שוק <strong>Tsukiji</strong> – סושי טרי, רמן, טמאגו ומזון רחוב אותנטי'},
+    {icon:'🏝️', text:'האי <strong>Odaiba</strong> + נסיעה באוטובוס אמפיבי במפרץ טוקיו'},
+    {icon:'🗽', text:'פסל החירות של אודיאבה'},
+    {icon:'🎮', text:'<strong>Akihabara</strong> – "עיר האלקטרוניקה", אנימה ומנגה'},
+    {icon:'🎨', text:'<strong>TeamLab Borderless</strong> – מוזיאון אמנות דיגיטלית'},
+    {icon:'🍽️', text:'ארוחת ערב ב-<strong>Gonpachi Nishi-Azabu</strong> (השראת Kill Bill)'},
+  ], hotel:'Hyatt Regency Tokyo'},
+  { id:'g3', num:'4', date:'29.5.2026 · שישי', title:'טקס תה – מקדש סנסוג\'י', badge:'db-group', activities:[
+    {icon:'🍵', text:'<strong>טקס התה</strong> היפני המסורתי – אמנות, שלווה וכבוד'},
+    {icon:'⛩️', text:'מקדש <strong>Sensoji</strong> באסאקוסה – הפנס האדום הענק, קטורת'},
+    {icon:'🛍️', text:'שוק מזכרות וחטיפים ברחוב המסורתי'},
+    {icon:'🏙️', text:'<strong>Tokyo Skytree</strong> – תצפית מ-634 מטר, ואולי הר פוג\'י!'},
+    {icon:'🚶', text:'מעבר החצייה של <strong>Shibuya</strong> + סיפור הכלב האצ\'יקו'},
+    {icon:'🍽️', text:'ארוחת ערב ב-<strong>Kitchen Crossroads</strong> במלון'},
+    {icon:'💕', text:'<strong>נטי מגיעה!</strong> מצטרפת לקבוצה'},
+  ], hotel:'Hyatt Regency Tokyo'},
+  { id:'g4', num:'5', date:'30.5.2026 · שבת', title:'מקדש מֵייג\'י – האראג\'וקו', badge:'db-group', activities:[
+    {icon:'⛩️', text:'מקדש <strong>Meiji</strong> – שבילי ארז עתיקים, אולי חתונה יפנית!'},
+    {icon:'🎌', text:'<strong>Harajuku</strong> – Takeshita-dori, אופנה נועזת ומתוקים'},
+    {icon:'👗', text:'<strong>Omotesando</strong> – "השאנז אליזה של טוקיו"'},
+    {icon:'🛍️', text:'<strong>Ginza</strong> – בוטיקים יוקרתיים וגלריות אמנות'},
+    {icon:'🍽️', text:'ארוחת ערב ב-<strong>Banya Izakaya</strong> – חדרים פרטיים יפניים'},
+  ], hotel:'Hyatt Regency Tokyo'},
+  { id:'g5', num:'6', date:'31.5.2026 · ראשון', title:'אקונה – אגם אשי', badge:'db-group', activities:[
+    {icon:'🚅', text:'רכבת קליע לעיר <strong>אודווארה</strong>'},
+    {icon:'⛵', text:'שייט ב<strong>אגם אשי</strong> על ספינת פיראטים · נוף להר פוג\'י'},
+    {icon:'🎨', text:'<strong>מוזיאון הפתוח של האקונה</strong> – פיקאסו, הנרי מור ועוד'},
+    {icon:'🍽️', text:'צהרים ב-<strong>Foresta Bella</strong> במוזיאון'},
+    {icon:'♨️', text:'<strong>Onsen</strong> – מי מעיינות חמים טבעיים ומינרליים'},
+    {icon:'🏙️', text:'חזרה לטוקיו · ערב חופשי'},
+    {icon:'🏨', text:'<strong>נטי ויהודה עוברים ל-Shibuya Excel Hotel Tokyu</strong>'},
+  ], hotel:'Hyatt Regency Tokyo'},
+  { id:'g6', num:'7–8', date:'1–2.6.2026 · שני–שלישי', title:'טוקיו → אבו דאבי → ת"א', badge:'db-group', activities:[
+    {icon:'🛍️', text:'בוקר חופשי לקניות אחרונות'},
+    {icon:'✈️', text:'טיסת ערב טוקיו → אבו דאבי (EY815, 18:15)'},
+    {icon:'🏨', text:'לינה קצרה בשדה התעופה (~6 שעות)'},
+    {icon:'✈️', text:'טיסת בוקר אבו דאבי → ת"א (EY593, 09:00) · נחיתה 11:25'},
+    {icon:'💕', text:'<strong>נטי ויהודה נשארים!</strong> – ממשיכים לבד'},
+  ], hotel:''},
+];
+
+const coupleDays = [
+  { id:'c1', num:'29.5', date:'29.5.2026 · שישי', title:'נטי מגיעה! · ימים עם הקבוצה', badge:'db-couple', activities:[
+    {icon:'✈️', text:'נטי טסה לבד מת"א (אתיחאד ~15:00)'},
+    {icon:'👥', text:'מצטרפת לקבוצה – טקס תה, Sensoji, Tokyo Skytree'},
+    {icon:'🚶', text:'מעבר החצייה של Shibuya + הכלב האצ\'יקו'},
+    {icon:'🍽️', text:'ארוחת ערב Kitchen Crossroads במלון'},
+  ], hotel:'Hyatt Regency Tokyo'},
+  { id:'c2', num:'30.5', date:'30.5.2026 · שבת', title:'עם הקבוצה · מקדש מייג\'י', badge:'db-couple', activities:[
+    {icon:'⛩️', text:'מקדש <strong>Meiji</strong> עם הקבוצה'},
+    {icon:'🎌', text:'<strong>Harajuku</strong> · Omotesando · Ginza'},
+    {icon:'🍽️', text:'ארוחת ערב Banya Izakaya'},
+  ], hotel:'Hyatt Regency Tokyo'},
+  { id:'c3', num:'31.5', date:'31.5.2026 · ראשון', title:'עם הקבוצה · אקונה + מעבר למלון שיבויה', badge:'db-couple', activities:[
+    {icon:'⛵', text:'אגם אשי · מוזיאון האקונה · Onsen'},
+    {icon:'🏨', text:'<strong>צ\'ק-אין Shibuya Excel Hotel Tokyu</strong> (31.5, 14:00)'},
+    {icon:'🌆', text:'ערב ראשון בשיבויה לשניכם!'},
+  ], hotel:'Shibuya Excel Hotel Tokyu'},
+  { id:'c4', num:'1.6', date:'1.6.2026 · שני', title:'💑 לבד! הקבוצה חוזרת – אתם נשארים', badge:'db-couple', activities:[
+    {icon:'☕', text:'ארוחת בוקר שלווה בשיבויה – בלי לוח זמנים!'},
+    {icon:'🌳', text:'<strong>Yoyogi Park</strong> – פיקניק יפני'},
+    {icon:'☕', text:'קפה בוטיקי ב-<strong>Daikanyama</strong> – השכונה הכי יפה'},
+    {icon:'🛍️', text:'קניות וטיול חופשי בשיבויה'},
+    {icon:'🌃', text:'ארוחת ערב רומנטית עם נוף לעיר'},
+  ], hotel:'Shibuya Excel Hotel Tokyu'},
+  { id:'c5', num:'2.6', date:'2.6.2026 · שלישי', title:'🚄 שינקנסן → קיוטו!', badge:'db-couple', activities:[
+    {icon:'🏨', text:'צ\'ק-אאוט Shibuya Excel Hotel (עד 11:00)'},
+    {icon:'🍱', text:'תחנת טוקיו · קנו בנטו לדרך!'},
+    {icon:'🚄', text:'שינקנסן <strong>Nozomi</strong> לקיוטו – 2:15 שעות'},
+    {icon:'🗻', text:'<strong>נוף לפוג\'י בדרך!</strong> שבו בצד ימין (מושב E)'},
+    {icon:'🏨', text:'צ\'ק-אין <strong>Gate Hotel Kyoto Takasegawa by Hulic</strong> (2.6, 14:00)'},
+    {icon:'🛒', text:'שוק <strong>Nishiki</strong> – "מטבח קיוטו"'},
+    {icon:'🍜', text:'ארוחת ערב ב-<strong>Pontocho</strong> – סמטת האוכל הרומנטית'},
+  ], hotel:'Gate Hotel Kyoto Takasegawa by Hulic'},
+  { id:'c6', num:'3.6', date:'3.6.2026 · רביעי', title:'קיוטו הקלאסי – מקדשים וגייאשות', badge:'db-couple', activities:[
+    {icon:'⛩️', text:'בוקר מוקדם ב-<strong>Fushimi Inari</strong> – אלפי שערי טוריי אדומים'},
+    {icon:'🏯', text:'<strong>Kinkaku-ji</strong> – ביית הזהב המרהיב'},
+    {icon:'🏮', text:'<strong>Gion</strong> – רובע הגייאשות · מקדש Yasaka Shrine'},
+    {icon:'🛤️', text:'<strong>Ninenzaka / Sannenziaka</strong> – סמטות מרוצפות עתיקות'},
+    {icon:'🏛️', text:'מקדש <strong>Kiyomizudera</strong> – על ההר עם נוף לעיר'},
+  ], hotel:'Gate Hotel Kyoto Takasegawa by Hulic'},
+  { id:'c7', num:'4.6', date:'4.6.2026 · חמישי', title:'ארשיאמה – יער הבמבוק', badge:'db-couple', activities:[
+    {icon:'🎋', text:'<strong>יער הבמבוק</strong> – בוקר מוקדם לפני ההמונים'},
+    {icon:'⛩️', text:'מקדש <strong>Tenryu-ji</strong> – גן זן (אתר מורשת עולמית)'},
+    {icon:'⛵', text:'שייט בסירה על <strong>נהר Oi</strong>'},
+    {icon:'🍵', text:'<strong>טקס תה</strong> מסורתי לשניכם'},
+    {icon:'♨️', text:'<strong>Onsen</strong> – ערב רגוע במעיינות חמים'},
+  ], hotel:'Gate Hotel Kyoto Takasegawa by Hulic'},
+  { id:'c8', num:'5.6', date:'5.6.2026 · שישי', title:'צ\'ק-אאוט → אוסקה → הביתה ✈️', badge:'db-couple', activities:[
+    {icon:'🏨', text:'צ\'ק-אאוט Gate Hotel Kyoto (עד 11:00)'},
+    {icon:'🚅', text:'רכבת מהירה קיוטו → אוסקה (~15 דקות)'},
+    {icon:'🍢', text:'כמה שעות באוסקה – שוק <strong>Dotonbori</strong>, אוכל רחוב'},
+    {icon:'✈️', text:'העברה לנמל התעופה <strong>Kansai KIX</strong>'},
+    {icon:'✈️', text:'<strong>EY815</strong> המראה 18:40 · אוסקה → אבו דאבי'},
+    {icon:'🏠', text:'נחיתה בת"א 6.6 בשעה 11:25'},
+  ], hotel:''},
+];
+
+function buildDays(days, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = days.map(d => `
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay('${d.id}')">
+        <div class="day-num ${d.id.startsWith('g') ? 'dn-group' : 'dn-couple'}">${d.num}</div>
+        <div class="day-info">
+          <div class="day-title">${d.title}</div>
+          <div class="day-date">${d.date}</div>
+          <span class="day-badge ${d.badge}">${d.id.startsWith('g') ? 'קבוצה' : 'נטי ויהודה'}</span>
+        </div>
+        <div class="day-chevron" id="chev-${d.id}">▼</div>
+      </div>
+      <div class="day-body" id="body-${d.id}">
+        ${d.activities.map(a=>`<div class="act"><div class="act-icon">${a.icon}</div><div class="act-text">${a.text}</div></div>`).join('')}
+        ${d.hotel ? `<div class="hotel-pill">🏨 ${d.hotel}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+buildDays(groupDays, 'gdays');
+buildDays(coupleDays, 'cdays');
+
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('section-'+name).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleDay(id) {
+  const body = document.getElementById('body-'+id);
+  const chev = document.getElementById('chev-'+id);
+  body.classList.toggle('open');
+  if(chev) chev.classList.toggle('open');
+}
+
+function toggleCheck(li) {
+  li.classList.toggle('done');
+  li.querySelector('.cbox').classList.toggle('checked');
+}
+
+document.getElementById('photo-input').addEventListener('change', function(e){
+  const grid = document.getElementById('photo-grid');
+  Array.from(e.target.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = document.createElement('img');
+      img.className = 'photo-thumb';
+      img.src = ev.target.result;
+      grid.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+});
+</script>
+</body>
+</html>
